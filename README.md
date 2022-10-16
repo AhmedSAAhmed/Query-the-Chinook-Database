@@ -11,7 +11,10 @@ chinwook database schema<img width="652" alt="001" src="https://user-images.gith
 2. [Results.pdf](https://github.com/AhmedSAAhmed/Query-the-Chinook-Database/blob/main/SQL%20Project%20Submission%20Presentation.pdf) file which has the question, the visualization of the answer and its description
 
 ## We answered many questions using queries and charts, here are some:
-Top 10 Sales By Artist And Invoices.
-Which Country listen The Most To Iron Maiden ?
-What Are The Most Listen To Genre By Minutes?
-Who Is The Top Sales Agent ?
+1.Top 10 Sales By Artist And Invoices.
+
+2.Which Country listen The Most To Iron Maiden ?
+
+3.What Are The Most Listen To Genre By Minutes?
+
+4.Who Is The Top Sales Agent ?
