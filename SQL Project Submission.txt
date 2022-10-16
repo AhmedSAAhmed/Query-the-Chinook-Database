@@ -1,0 +1,78 @@
+/* Query 1 - query used for first insight */
+SELECT 
+  a.name Artist_Name, 
+  COUNT(i.InvoiceId) Invoices, 
+  sum(il.Quantity * il.UnitPrice) total_sales 
+FROM 
+  Invoice i 
+  JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceId 
+  JOIN Track t ON il.TrackId = t.TrackId 
+  JOIN Album al ON t.AlbumId = al.AlbumId 
+  JOIN Artist a ON a.ArtistId = al.ArtistId 
+GROUP BY 
+  1 
+ORDER BY 
+  3 DESC 
+LIMIT 
+  10;
+
+/* Query 2- query used for second insight */
+SELECT 
+  a.name Artist_Name, 
+  i.BillingCountry Country_name, 
+  sum(il.Quantity * il.UnitPrice) total_sales 
+FROM 
+  Invoice i 
+  JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceId 
+  JOIN Track t ON il.TrackId = t.TrackId 
+  JOIN Album al ON t.AlbumId = al.AlbumId 
+  JOIN Artist a ON a.ArtistId = al.ArtistId 
+WHERE 
+  a.name = 'Iron Maiden' 
+GROUP BY 
+  2 
+ORDER BY 
+  3 DESC 
+LIMIT 
+  10;
+
+/* Query 3 - query used for first third insight*/
+SELECT 
+  g.Name Genre_name, 
+  SUM(
+    strftime(
+      '%M:%S', t.Milliseconds / 1000, 'unixepoch'
+    )
+  ) Track_Duration, 
+  sum(il.Quantity * il.UnitPrice) total_sales 
+FROM 
+  Track t 
+  JOIN InvoiceLine il ON t.TrackId = il.TrackId 
+  JOIN Genre g ON t.GenreId = g.GenreId 
+  /* Data cleaning there is some genre that are not a music and it is a movie genres*/
+WHERE 
+  Genre_name != 'TV Shows' 
+  AND Genre_name != 'Drama' 
+  AND Genre_name != 'Sci Fi & Fantasy' 
+  AND Genre_name != 'Comedy' 
+  AND Genre_name != 'Science Fiction' 
+GROUP BY 
+  1 
+ORDER BY 
+  3 DESC;
+
+/* Query 4- query used for forth insight */
+SELECT 
+  e.FirstName || ' ' || e.LastName AS FullName, 
+  e.Title, 
+  sum(il.Quantity * il.UnitPrice) Total_sales 
+FROM 
+  Employee e 
+  JOIN Customer c ON e.EmployeeId = c.SupportRepId 
+  JOIN Invoice i ON c.CustomerId = i.CustomerId 
+  JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceLineId 
+GROUP BY 
+  1 
+ORDER BY 
+  3 DESC;
+ 
